@@ -3,3 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/cgrithy/public_html/demo/
     - /bin/cp * $DEPLOYPATH
+    - /bin/cp -R images $DEPLOYPATH
