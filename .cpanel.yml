@@ -1,10 +1,10 @@
 deployment:
   tasks:
-    # Define the deploy path to your cPanel public directory
+    # Define the deployment path to your cPanel public directory
     - export DEPLOYPATH=/home/cgrithy/public_html/demo/
 
-    # Copy all files (including hidden ones) from the current directory to the deploy path
+    # Copy all files and folders (including hidden ones) recursively from the current workspace to the deployment directory
     - /bin/cp -R * $DEPLOYPATH
 
-    # Copy all files in the images directory to the deploy path (recursive)
-    - /bin/cp -R images/ $DEPLOYPATH/images/
+    # (Optional) Copy hidden files (like .env, .htaccess) if necessary
+    - /bin/cp -R .* $DEPLOYPATH
