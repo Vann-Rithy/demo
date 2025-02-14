@@ -1,0 +1,23 @@
+name: Deploy to cPanel via FTP
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Upload files via FTP
+      uses: sebastianpopp/ftp-action@v1
+      with:
+        ftp-server: ${{ secrets.FTP_SERVER }}
+        ftp-username: ${{ secrets.FTP_USERNAME }}
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./  # The directory to upload from (in this case, the repository's root directory)
+        remote-dir: /public_html/demo  # The directory on your cPanel server (adjust as needed)
