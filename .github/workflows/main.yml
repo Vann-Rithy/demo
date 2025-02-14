@@ -1,0 +1,24 @@
+name: Deploy to cPanel via FTP
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Upload files via FTP
+      uses: appleboy/ftp-action@v1
+      with:
+        host: ${{ secrets.FTP_SERVER }}        # FTP server address
+        username: ${{ secrets.FTP_USERNAME }}  # FTP username
+        password: ${{ secrets.FTP_PASSWORD }}  # FTP password
+        port: 21                               # FTP port (default: 21)
+        local-dir: ./                           # Local directory (e.g., the root of your repository)
+        remote-dir: /home/cgrithy/public_html/cgrithy.com/demo  # Remote directory on your server
